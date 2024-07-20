@@ -14,9 +14,9 @@ function divide(a, b) {
     return a / b
 }
 
-let firstNumber = 0
-let operator = 0
-let secondNumber = 0
+let firstNumber = ''
+let operator = ''
+let secondNumber = ''
 
 function operate(firstNumber, operator, secondNumber) {
 
@@ -24,8 +24,17 @@ function operate(firstNumber, operator, secondNumber) {
 
 const display = document.querySelector('#display')
 
-const button = document.querySelectorAll('.box').forEach(button => 
+const button = document.querySelectorAll('.number').forEach(button => 
     button.addEventListener('click', () => {
-        firstNumber = button.id
+        firstNumber += button.id
+        display.textContent = firstNumber
+        console.log(firstNumber)
     }
 ))
+
+const operatorButton = document.querySelectorAll('.operator').forEach(operatorButton => 
+    operatorButton.addEventListener('click', () => {
+        operator = operatorButton.id
+        display.textContent = operator
+    })
+)
