@@ -30,12 +30,20 @@ function operate(displayString) {
         return multiply(Number(firstNumber), Number(secondNumber))
     }
     else if (operator === '/') {
+        if (firstNumber || secondNumber === 0) {
+            display.textContent = 'No, no, no...'
+            return ''
+        }
         return divide(Number(firstNumber), Number(secondNumber))
     }
 }
 
 function clear() {
     displayString = ''
+    firstNumber = ''
+    operator = ''
+    secondNumber = ''
+    display.textContent = '0'
 }
 
 let firstNumber = ''
@@ -56,11 +64,20 @@ const operatorButton = document.querySelectorAll('.operator').forEach(operatorBu
     operatorButton.addEventListener('click', () => {
         displayString += operatorButton.id
         display.textContent = displayString
-    }, {once : true})
+        //checkForNewOperator()
+    })
 )
+// if clicked again call operate and clear display
 
 const equals = document.querySelector('.equals')
 equals.addEventListener('click', () => {
-        display.textContent = operate(displayString)
+        displayString = operate(displayString)
+        display.textContent = displayString
     }
 )
+
+// let numOfOperators = displayString.filter(operator => isNaN(operator))
+// if (numOfOperators >= 2) {
+//     //remove and store extra operator
+//     operate(displayString)
+// }
