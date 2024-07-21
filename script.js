@@ -36,6 +36,9 @@ function operate(displayString) {
         }
         return divide(Number(firstNumber), Number(secondNumber))
     }
+    else {
+        return ''
+    }
 }
 
 function clear() {
@@ -64,7 +67,7 @@ const operatorButton = document.querySelectorAll('.operator').forEach(operatorBu
     operatorButton.addEventListener('click', () => {
         displayString += operatorButton.id
         display.textContent = displayString
-        //checkForNewOperator()
+        //checkForNewOperator() put this while event in the other one 
     })
 )
 // if clicked again call operate and clear display
@@ -73,6 +76,12 @@ const equals = document.querySelector('.equals')
 equals.addEventListener('click', () => {
         displayString = operate(displayString)
         display.textContent = displayString
+    }
+)
+
+const clearBtn = document.querySelector('#clear')
+clearBtn.addEventListener('click', () => {
+        clear()
     }
 )
 
