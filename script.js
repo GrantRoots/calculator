@@ -16,24 +16,24 @@ function divide(a, b) {
 
 function operate(displayString) {
     splitString = displayString.split('')
-    operator = splitString.filter(operator => isNaN(operator)).join()
-    firstNumber = splitString.slice(0, splitString.indexOf(operator)).join('')
-    secondNumber = splitString.slice(splitString.indexOf(operator) + 1).join('')
+    let operator = splitString.filter(operator => isNaN(operator) && operator != '.').join()
+    let firstNumber = splitString.slice(0, splitString.indexOf(operator)).join('')
+    let secondNumber = splitString.slice(splitString.indexOf(operator) + 1).join('')
 
     if (operator === '+') {
-        return add(Number(firstNumber), Number(secondNumber))
+        return Math.round(add(Number(firstNumber), Number(secondNumber)) * 100) / 100
     }
     else if (operator === '-') {
-        return subtract(Number(firstNumber), Number(secondNumber))
+        return Math.round(subtract(Number(firstNumber), Number(secondNumber) * 100)) / 100
     }
     else if (operator === '*') {
-        return multiply(Number(firstNumber), Number(secondNumber))
+        return Math.round(multiply(Number(firstNumber), Number(secondNumber)) * 100) / 100
     }
     else if (operator === '/') {
-        if (secondNumber === 0) {
+        if (secondNumber == 0) {
             return 'No, no, no...'
         }
-        return divide(Number(firstNumber), Number(secondNumber))
+        return Math.round(divide(Number(firstNumber), Number(secondNumber)) * 100) / 100
     }
     else {
         return 'ERROR'
@@ -42,7 +42,7 @@ function operate(displayString) {
 
 function checkNewOperator(displayString) {
     splitString = displayString.split('')
-    let numOfOperators = splitString.filter(operator => isNaN(operator))
+    let numOfOperators = splitString.filter(operator => isNaN(operator) && operator != '.')
     if (numOfOperators.length >= 2) {
         let newOperator = numOfOperators[1]
         splitString.splice(-1, 1)
@@ -51,9 +51,6 @@ function checkNewOperator(displayString) {
     return
 }
 
-let firstNumber = ''
-let operator = ''
-let secondNumber = ''
 let displayString = ''
 
 const display = document.querySelector('#display')
@@ -78,9 +75,6 @@ equals.addEventListener('click', () => {
 const clearBtn = document.querySelector('#clear')
 clearBtn.addEventListener('click', () => {
         displayString = ''
-        firstNumber = ''
-        operator = ''
-        secondNumber = ''
         display.textContent = '0'
     }
 )

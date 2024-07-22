@@ -40,8 +40,7 @@ body {
     color: white;
     padding-bottom: 10px;
     font-size: 70px;
-    display: flex;
-    flex-wrap: wrap;
+    overflow: auto;
 }
 
 .operator, .equals {
