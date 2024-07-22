@@ -68,7 +68,7 @@ const button = document.querySelectorAll('.number, .operator').forEach(button =>
 const equals = document.querySelector('.equals')
 equals.addEventListener('click', () => {
         display.textContent = operate(displayString)
-        displayString = ''
+        displayString = operate(displayString)
     }
 )
 
