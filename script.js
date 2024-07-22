@@ -30,23 +30,25 @@ function operate(displayString) {
         return multiply(Number(firstNumber), Number(secondNumber))
     }
     else if (operator === '/') {
-        if (firstNumber || secondNumber === 0) {
-            display.textContent = 'No, no, no...'
-            return ''
+        if (secondNumber === 0) {
+            return 'No, no, no...'
         }
         return divide(Number(firstNumber), Number(secondNumber))
     }
     else {
-        return ''
+        return 'ERROR'
     }
 }
 
-function clear() {
-    displayString = ''
-    firstNumber = ''
-    operator = ''
-    secondNumber = ''
-    display.textContent = '0'
+function checkNewOperator(displayString) {
+    splitString = displayString.split('')
+    let numOfOperators = splitString.filter(operator => isNaN(operator))
+    if (numOfOperators.length >= 2) {
+        let newOperator = numOfOperators[1]
+        splitString.splice(-1, 1)
+        return displayString = operate(splitString.join('')) + newOperator
+    }
+    return
 }
 
 let firstNumber = ''
@@ -56,37 +58,29 @@ let displayString = ''
 
 const display = document.querySelector('#display')
 
-const button = document.querySelectorAll('.number').forEach(button => 
+const button = document.querySelectorAll('.number, .operator').forEach(button => 
     button.addEventListener('click', () => {
         displayString += button.id
+        if (checkNewOperator(displayString)){
+            displayString = checkNewOperator(displayString)
+        }
         display.textContent = displayString
     }
 ))
 
-const operatorButton = document.querySelectorAll('.operator').forEach(operatorButton => 
-    operatorButton.addEventListener('click', () => {
-        displayString += operatorButton.id
-        display.textContent = displayString
-        //checkForNewOperator() put this while event in the other one 
-    })
-)
-// if clicked again call operate and clear display
-
 const equals = document.querySelector('.equals')
 equals.addEventListener('click', () => {
-        displayString = operate(displayString)
-        display.textContent = displayString
+        display.textContent = operate(displayString)
+        displayString = ''
     }
 )
 
 const clearBtn = document.querySelector('#clear')
 clearBtn.addEventListener('click', () => {
-        clear()
+        displayString = ''
+        firstNumber = ''
+        operator = ''
+        secondNumber = ''
+        display.textContent = '0'
     }
 )
-
-// let numOfOperators = displayString.filter(operator => isNaN(operator))
-// if (numOfOperators >= 2) {
-//     //remove and store extra operator
-//     operate(displayString)
-// }
