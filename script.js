@@ -24,7 +24,7 @@ function operate(displayString) {
         return Math.round(add(Number(firstNumber), Number(secondNumber)) * 100) / 100
     }
     else if (operator === '-') {
-        return Math.round(subtract(Number(firstNumber), Number(secondNumber) * 100)) / 100
+        return Math.round(subtract(Number(firstNumber), Number(secondNumber)) * 100) / 100
     }
     else if (operator === '*') {
         return Math.round(multiply(Number(firstNumber), Number(secondNumber)) * 100) / 100
